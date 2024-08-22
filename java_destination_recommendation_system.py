@@ -383,6 +383,24 @@ recommend_items('Monumen Nasional')
 
 """Dari rekomendasi diatas didapatkan 3 rekomendasi destinasi wisata yang mirip dengan Monumen Nasional yaitu Monumen Selamat Datang, Museum Tekstil, dan Museum Sasmita Loka Ahmad Yani
 
+### Evaluasi hasil rekomendasi
+"""
+
+# mencari ground_truth dari data 'Monumen Nasional'
+ground_truth = data[(data['category_city'] == 'Budaya_Jakarta') | (data['price'] == 20000) | (data['time_minutes'] == 15.0) | (data['rating'] == 4.6)]
+ground_truth
+
+# Fungsi hitung akurasi rekomendasi
+def calculate_accuracy(recommendations, ground_truth):
+    correct_recommendations = recommendations[recommendations['name'].isin(ground_truth['name'])]
+    accuracy = len(correct_recommendations) / len(recommendations) * 100
+    return accuracy
+
+accuracy = calculate_accuracy(recommend_items('Monumen Nasional'), ground_truth)
+print(f'Accuracy: {accuracy}%')
+
+"""Didapatkan bahwa dengan menghitung manual akurasi rekomendasi destinasi wisata yang diberikan dari destinasi 'Monumen Nasional' didapatkan bahwa semua rekomendasi masuk kedalam ground_truth dan memiliki akurasi 100%
+
 ## Collaborative Filtering (User Based)
 """
 
